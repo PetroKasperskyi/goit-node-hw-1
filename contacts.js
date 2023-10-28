@@ -5,7 +5,22 @@ const path = require("node:path");
 
 const contactsPath = path.join(__dirname, "db", "contacts.json");
 
+async function readContactsList() {
+    try {
+        const data = await fs.readFile(contactsPath, { encoding: "utf-8" })
+        return JSON.parse(data)
+    } catch (error) {
+        throw new Error(error.massege)
+    }
+};
 
+async function writeContactsList(contacts) {
+  try {
+    return await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 function listContacts() {
  
